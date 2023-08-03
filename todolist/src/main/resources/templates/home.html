@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -183,34 +183,41 @@ p.info {
 }
   </style>
 
-  <title>TODO-VanilaJS</title>
+  <title>ToDoList</title>
 </head>
 <body>
 <div class="todo-wrapper">
   <div class="todo-title">todos</div>
   <div class="todo-box">
 
-    <div class="todo-input-box">
-      <button class="complete-all-btn">✔</button>
-      <input type="text" class="todo-input" placeholder="해야 할 일을 입력해주세요.">
-    </div>
+    <form th:action="@{/}" method="post" th:object="${toDo}">
+      <div class="todo-input-box">
+        <button class="complete-all-btn" type="submit">✔</button>
+        <input type="text" th:field="*{title}" class="todo-input" placeholder="해야 할 일을 입력해주세요.">
+      </div>
+    </form>
 
     <ul class="todo-list">
-      <li class="todo-item checked">
-      <div class="checkbox">✔</div>
-      <div class="todo">첫번째 할 일</div>
-      <button class="delBtn">x</button>
-    </li>
-      <li class="todo-item">
-        <div class="checkbox"></div>
-        <div class="todo">두번째 할 일</div>
-        <button class="delBtn">x</button>
+
+
+      <li class="todo-item" th:each="toDo : ${toDos}" th:if="${toDo.deleted == false}" th:classappend="${toDo.completed == true} ? 'checked' : ''">
+        <div class="checkbox"><span th:if="${toDo.completed == true}">✔</span></div>
+        <div class="todo" th:text="${toDo.title}"></div>
+        <button class="delBtn" type="submit">x</button>
       </li>
-      <li class="todo-item">
-        <div class="checkbox"></div>
-        <div class="todo">세번째 할 일</div>
-        <button class="delBtn">x</button>
-      </li>
+
+<!--      <li class="todo-item">-->
+<!--        <div class="checkbox"></div>-->
+<!--        <div class="todo">두번째 할 일</div>-->
+<!--        <button class="delBtn">x</button>-->
+<!--      </li>-->
+
+<!--      <li class="todo-item">-->
+<!--        <div class="checkbox"></div>-->
+<!--        <div class="todo">세번째 할 일</div>-->
+<!--        <button class="delBtn">x</button>-->
+<!--      </li>-->
+
     </ul>
     <div class="todo-bottom">
       <div class="left-items">3 items left</div>

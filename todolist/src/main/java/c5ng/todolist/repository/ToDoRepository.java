@@ -18,7 +18,7 @@ public class ToDoRepository {
     }
 
     public List<ToDo> findAll() {
-        return em.createQuery("select t from todos t", ToDo.class)
+        return em.createQuery("select t from ToDo t", ToDo.class)
                 .getResultList();
     }
 
@@ -26,18 +26,32 @@ public class ToDoRepository {
         return em.find(ToDo.class, id);
     }
 
-    public void updateOne (Long id) {
+//    public void updateTitle (Long id, String title) {
+//        ToDo toDo = em.find(ToDo.class, id);
+//
+//        toDo.setTitle(title);
+//
+//    }
 
-    }
+//    public void updateCompleted (Long id) {
+//        ToDo toDo = em.find(ToDo.class, id);
+//
+//        if (toDo.getCompleted() == true) {
+//            toDo.setCompleted(false);
+//        } else if (toDo.getCompleted() == false) {
+//            toDo.setCompleted(true);
+//        }
+//
+//    }
 
-    public void removeAll() {
-        em.createQuery("select t from todos t", ToDo.class)
-                .getResultList();
+//    public void removeAll() {
+//        em.createQuery("select t from todos t", ToDo.class)
+//                .getResultList();
+//
+//    }
 
-    }
-
-    public void removeOne(Long id) {
-        ToDo toDo = em.find(ToDo.class, id);
-
-    }
+//    public void removeOne(Long id) {
+//        ToDo toDo = em.find(ToDo.class, id);
+//
+//    }
 }
