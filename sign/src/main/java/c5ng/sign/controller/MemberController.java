@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
+
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -26,7 +28,29 @@ public class MemberController {
 
     @PostMapping("/signUp")
     public String member(Member member) {
-        memberService.createMember(member);
+        memberService.addMember(member);
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("loginMember", new Member());
+        log.info("여기 탐 ?");
+
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(Member member) {
+        Optional<Member> loginMember = memberService.login(member);
+
+        if (loginMember.isPresent()) {
+            log.info("email : " + loginMember.get().getEmail());
+            log.info("password : " + loginMember.get().getPassword());
+        } else {
+            log.info("값 존재 X");
+        }
 
         return "redirect:/";
     }
