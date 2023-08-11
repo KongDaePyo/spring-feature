@@ -19,11 +19,12 @@ public class SecurityConfiguration {
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-//                .loginPage("/login")
-//                .loginProcessingUrl("/LoginProc")
+                .loginPage("/signUp")
+//                .loginProcessingUrl("/member/signUp")
 //                .defaultSuccessUrl("/")
                 .and().build();
     }
+
     /*
         http.csrf().disable() == CSRF 공격에 대한 방어를 해제한다.
         authorizeRequests() == URI에 따른 페이지에 대한 권한을 부여하기 위해 시작하는 메서드. antMatchers 기능을 이용하기 위해 사용
@@ -31,6 +32,5 @@ public class SecurityConfiguration {
         .anyRequest().permitAll() == 특정 URI를 제외한 나머지 URI는 전부 인가해준다.
         .formLogin() == 아이디와 비밀번호를 입력해서 들어오는 로그인 형태를 지원하는 security 기능. 아래와 같은 loginPage() 메서드 사용 가능
         .loginPage("/login") == 로그인 페이지를 설정한다. 로그인 하지 않았을 경우 로그인이 필요한 페이지를 들어갔을 때 로그인 페이지로 다시 redirect 하기 위한 메서드. 즉 인가되지 않은 사용자에게 보여줄 페이지를 설정한다.
-
      */
 }
